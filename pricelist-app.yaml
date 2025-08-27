@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: pricelist-app
+  namespace: argocd
+  finalizers:
+    - argocd.argoproj.io/resources-finalizer
+spec:
+  project: default
+  source:
+    path: manifests/
+    repoURL: https://marcobejarano/argocd-app-sync-options
+    targetRevision: main
+  destination:
+    namespace: pricelist
+    name: in-cluster
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m
