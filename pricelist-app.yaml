@@ -9,7 +9,7 @@ spec:
   project: default
   source:
     path: manifests/
-    repoURL: https://marcobejarano/argocd-app-sync-options
+    repoURL: https://github.com/marcobejarano/argocd-app-sync-options
     targetRevision: main
   destination:
     namespace: pricelist
